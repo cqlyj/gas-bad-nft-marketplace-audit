@@ -8,7 +8,7 @@
 
 methods {
     function _.safeTransferFrom(address, address, uint256) external => DISPATCHER(true);
-    function _.onERC721Received(address, address, uint256, bytes) external => ALWAYS(1); 
+    function _.onERC721Received(address, address, uint256, bytes) external => DISPATCHER(true); 
 }
 
 ghost mathint listingUpdatesCount {
