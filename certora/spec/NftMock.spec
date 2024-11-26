@@ -14,8 +14,8 @@ methods {
 //     satisfy true;
 // }
 
-invariant totalSupplyIsNotNegative()
-    totalSupply() >= 0;
+// invariant totalSupplyIsNotNegative()
+//     totalSupply() >= 0;
 
 rule mintingMintsOneNft() {
     env e;
@@ -29,4 +29,15 @@ rule mintingMintsOneNft() {
     currentContract.mint(e);
 
     assert to_mathint(balanceOf(minter)) == balanceBefore + 1, "Only one NFT should be minted";
+}
+
+// This will fail, just to show the parametric function
+rule noChangeToTotalSupply(method f) {
+    uint256 totalSupplyBefore = totalSupply();
+
+    env e;
+    calldataarg arg;
+    f(e, arg);
+
+    assert totalSupply() == totalSupplyBefore, "Total supply should not change";
 }
